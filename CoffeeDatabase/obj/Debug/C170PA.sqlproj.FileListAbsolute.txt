@@ -1,0 +1,6 @@
+C:\Users\jaege\source\repos\C170PA\C170PA\bin\Debug\C170PA.dacpac
+C:\Users\jaege\source\repos\C170PA\C170PA\bin\Debug\C170PA.dll
+C:\Users\jaege\source\repos\C170PA\C170PA\bin\Debug\C170PA.pdb
+C:\Users\jaege\source\repos\C170PA\C170PA\obj\Debug\C170PA.sqlproj.AssemblyReference.cache
+C:\Users\jaege\source\repos\C170PA\C170PA\obj\Debug\C170PA.dll
+C:\Users\jaege\source\repos\C170PA\C170PA\obj\Debug\C170PA.pdb
