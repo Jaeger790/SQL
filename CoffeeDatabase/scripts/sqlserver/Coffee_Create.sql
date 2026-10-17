@@ -24,7 +24,7 @@ GO
 /*
 Detect SQLCMD mode and disable script execution if SQLCMD mode is not supported.
 To re-enable the script after enabling SQLCMD mode, execute the following:
-SET NOEXEC OFF; 
+SET NOEXEC OFF;
 */
 :setvar __IsSqlCmdEnabled "True"
 GO
@@ -41,7 +41,7 @@ USE [master];
 
 GO
 
-IF (DB_ID(N'$(DatabaseName)') IS NOT NULL) 
+IF (DB_ID(N'$(DatabaseName)') IS NOT NULL)
 BEGIN
     ALTER DATABASE [$(DatabaseName)]
     SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
@@ -76,7 +76,7 @@ IF EXISTS (SELECT 1
                 AUTO_CREATE_STATISTICS ON,
                 AUTO_SHRINK OFF,
                 AUTO_UPDATE_STATISTICS ON,
-                RECURSIVE_TRIGGERS OFF 
+                RECURSIVE_TRIGGERS OFF
             WITH ROLLBACK IMMEDIATE;
     END
 
@@ -97,7 +97,7 @@ IF EXISTS (SELECT 1
            WHERE  [name] = N'$(DatabaseName)')
     BEGIN
         ALTER DATABASE [$(DatabaseName)]
-            SET READ_COMMITTED_SNAPSHOT OFF 
+            SET READ_COMMITTED_SNAPSHOT OFF
             WITH ROLLBACK IMMEDIATE;
     END
 
@@ -113,7 +113,7 @@ IF EXISTS (SELECT 1
                 DATE_CORRELATION_OPTIMIZATION OFF,
                 DISABLE_BROKER,
                 PARAMETERIZATION SIMPLE,
-                SUPPLEMENTAL_LOGGING OFF 
+                SUPPLEMENTAL_LOGGING OFF
             WITH ROLLBACK IMMEDIATE;
     END
 
@@ -127,7 +127,7 @@ IF IS_SRVROLEMEMBER(N'sysadmin') = 1
             BEGIN
                 EXECUTE sp_executesql N'ALTER DATABASE [$(DatabaseName)]
     SET TRUSTWORTHY OFF,
-        DB_CHAINING OFF 
+        DB_CHAINING OFF
     WITH ROLLBACK IMMEDIATE';
             END
     END
@@ -145,7 +145,7 @@ IF IS_SRVROLEMEMBER(N'sysadmin') = 1
                    WHERE  [name] = N'$(DatabaseName)')
             BEGIN
                 EXECUTE sp_executesql N'ALTER DATABASE [$(DatabaseName)]
-    SET HONOR_BROKER_PRIORITY OFF 
+    SET HONOR_BROKER_PRIORITY OFF
     WITH ROLLBACK IMMEDIATE';
             END
     END
@@ -157,7 +157,7 @@ ELSE
 
 GO
 ALTER DATABASE [$(DatabaseName)]
-    SET TARGET_RECOVERY_TIME = 0 SECONDS 
+    SET TARGET_RECOVERY_TIME = 0 SECONDS
     WITH ROLLBACK IMMEDIATE;
 
 
@@ -168,7 +168,7 @@ IF EXISTS (SELECT 1
     BEGIN
         ALTER DATABASE [$(DatabaseName)]
             SET FILESTREAM(NON_TRANSACTED_ACCESS = OFF),
-                CONTAINMENT = NONE 
+                CONTAINMENT = NONE
             WITH ROLLBACK IMMEDIATE;
     END
 
@@ -181,7 +181,7 @@ IF EXISTS (SELECT 1
         ALTER DATABASE [$(DatabaseName)]
             SET AUTO_CREATE_STATISTICS ON(INCREMENTAL = OFF),
                 MEMORY_OPTIMIZED_ELEVATE_TO_SNAPSHOT = OFF,
-                DELAYED_DURABILITY = DISABLED 
+                DELAYED_DURABILITY = DISABLED
             WITH ROLLBACK IMMEDIATE;
     END
 
@@ -192,7 +192,7 @@ IF EXISTS (SELECT 1
            WHERE  [name] = N'$(DatabaseName)')
     BEGIN
         ALTER DATABASE [$(DatabaseName)]
-            SET QUERY_STORE (QUERY_CAPTURE_MODE = ALL, DATA_FLUSH_INTERVAL_SECONDS = 900, INTERVAL_LENGTH_MINUTES = 60, MAX_PLANS_PER_QUERY = 200, CLEANUP_POLICY = (STALE_QUERY_THRESHOLD_DAYS = 367), MAX_STORAGE_SIZE_MB = 100) 
+            SET QUERY_STORE (QUERY_CAPTURE_MODE = ALL, DATA_FLUSH_INTERVAL_SECONDS = 900, INTERVAL_LENGTH_MINUTES = 60, MAX_PLANS_PER_QUERY = 200, CLEANUP_POLICY = (STALE_QUERY_THRESHOLD_DAYS = 367), MAX_STORAGE_SIZE_MB = 100)
             WITH ROLLBACK IMMEDIATE;
     END
 
@@ -203,7 +203,7 @@ IF EXISTS (SELECT 1
            WHERE  [name] = N'$(DatabaseName)')
     BEGIN
         ALTER DATABASE [$(DatabaseName)]
-            SET QUERY_STORE = OFF 
+            SET QUERY_STORE = OFF
             WITH ROLLBACK IMMEDIATE;
     END
 
@@ -249,7 +249,7 @@ IF (@VarDecimalSupported > 0)
 
 GO
 ALTER DATABASE [$(DatabaseName)]
-    SET MULTI_USER 
+    SET MULTI_USER
     WITH ROLLBACK IMMEDIATE;
 
 

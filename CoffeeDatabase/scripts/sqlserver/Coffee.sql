@@ -24,7 +24,7 @@ GO
 /*
 Detect SQLCMD mode and disable script execution if SQLCMD mode is not supported.
 To re-enable the script after enabling SQLCMD mode, execute the following:
-SET NOEXEC OFF; 
+SET NOEXEC OFF;
 */
 :setvar __IsSqlCmdEnabled "True"
 GO
