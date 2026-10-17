@@ -1,4 +1,4 @@
---Section B Write a SQL code that creates the tables to hold your report sections. 
+--Section B Write a SQL code that creates the tables to hold your report sections.
 
 CREATE TABLE detailed_report(
     rental_date TIMESTAMP WITHOUT TIME ZONE,
@@ -20,14 +20,14 @@ INSERT INTO detailed_report(
     title,
     rental_id
 )
-SELECT ren.rental_date AS rental_month, 
+SELECT ren.rental_date AS rental_month,
        fil.title AS film_title,
        ren.rental_id AS rental_count
-FROM rental AS ren 
-JOIN inventory AS inv 
-   ON ren.inventory_id = inv.inventory_id 
-JOIN film AS fil 
-   ON inv.film_id = fil.film_id 
+FROM rental AS ren
+JOIN inventory AS inv
+   ON ren.inventory_id = inv.inventory_id
+JOIN film AS fil
+   ON inv.film_id = fil.film_id
 GROUP BY ren.rental_date,
          fil.title
 ORDER BY rental_month,
@@ -35,9 +35,9 @@ ORDER BY rental_month,
 
 
 --Section D Write code for function(s) that perform the transformation(s) you identified in part A4.
-CREATE FUNCTION update_summary() 
-RETURNS TRIGGER 
-LANGUAGE PLPGSQL 
+CREATE FUNCTION update_summary()
+RETURNS TRIGGER
+LANGUAGE PLPGSQL
 AS $$
 BEGIN
     DELETE FROM summary_report;
@@ -68,14 +68,14 @@ INSERT INTO detailed_report(
     title,
     rental_id
 )
-SELECT ren.rental_date AS rental_month, 
+SELECT ren.rental_date AS rental_month,
        fil.title,
        ren.rental_id
-FROM rental AS ren 
-JOIN inventory AS inv 
-   ON ren.inventory_id = inv.inventory_id 
-JOIN film AS fil 
-   ON inv.film_id = fil.film_id 
+FROM rental AS ren
+JOIN inventory AS inv
+   ON ren.inventory_id = inv.inventory_id
+JOIN film AS fil
+   ON inv.film_id = fil.film_id
 GROUP BY ren.rental_date,
          fil.title,
          ren.rental_id;
@@ -86,5 +86,3 @@ END;$$
 CALL refresh_reports();
 SELECT * FROM detailed_report;
 SELECT * FROM summary_report;
-
-
